@@ -9,4 +9,4 @@ app.use(cors());
 
 app.use("/auth", testRouter);
 
-app.listen(port, () => console.log(`Server is running on ${port}`));
+app.listen(port, () => console.log(`Server is running on port: ${port}`));
