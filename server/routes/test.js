@@ -8,20 +8,16 @@ const router = express.Router();
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
+// use xml2js to parse the XML data in the request body
+const parser = new Parser();
+
 // handle the POST request to /test
-router.post("/", upload.single("anpr.xml"), (req, res) => {
-  // use xml2js to parse the XML data in the request body
-  const parser = new Parser();
-  parser.parseString(req.file.buffer.toString(), (err, result) => {
-    if (err) {
-      console.error(err);
-      res.status(400).send("Error parsing XML");
-    } else {
-      // handle the parsed data as needed
-      console.log(result);
-      res.send("Success");
-    }
-  });
+router.post("/", async (req, res) => {
+  const xmlreq = req.body;
+
+  console.log(xmlreq);
+
+  res.status(200).json({ okay: "successfully" });
 });
 
 router.get("/", async (req, res) => {
