@@ -9,4 +9,13 @@ app.use(cors());
 
 app.use("/test", testRouter);
 
+app.get("/", async (req, res) => {
+  try {
+    const response = "Home";
+    res.json(response);
+  } catch (err) {
+    res.json(err);
+  }
+});
+
 app.listen(port, () => console.log(`Server is running on port: ${port}`));

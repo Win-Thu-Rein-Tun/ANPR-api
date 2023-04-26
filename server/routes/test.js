@@ -24,4 +24,13 @@ router.post("/", upload.single("anpr.xml"), (req, res) => {
   });
 });
 
+router.get("/", async (req, res) => {
+  try {
+    const response = "Hello World!";
+    res.json(response);
+  } catch (err) {
+    res.json(err);
+  }
+});
+
 export { router as testRouter };
