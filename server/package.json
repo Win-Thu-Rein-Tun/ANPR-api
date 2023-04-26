@@ -1,0 +1,11 @@
+{
+  "name": "anprapi",
+  "version": "0.0.1",
+  "description": "no need",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "win-thu-rein-tun",
+  "license": "ISC"
+}
