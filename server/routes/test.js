@@ -15,7 +15,9 @@ const parser = new Parser();
 router.post("/", async (req, res) => {
   const xmlreq = req.body;
 
-  console.log(xmlreq);
+  const stringData = JSON.stringify(xmlreq);
+
+  console.log(stringData);
 
   res.status(200).json({ okay: "successfully" });
 });
