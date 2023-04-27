@@ -4,6 +4,8 @@ import express from "express";
 
 const router = express.Router();
 
+let response = [];
+
 // configure the multer middleware to handle the file upload
 // const storage = multer.memoryStorage();
 // const upload = multer({ storage });
@@ -13,15 +15,16 @@ const router = express.Router();
 
 // handle the POST request to /test
 router.post("/", async (req, res, next) => {
-  console.log("Raw XML: " + req.rawBody);
-  console.log("Parsed XML: " + JSON.stringify(req.body));
+  // console.log("Raw XML: " + req.rawBody);
+  // console.log("Parsed XML: " + JSON.stringify(req.body));
 
-  res.status(200).send("okay request");
+  response = req.rawBody
+
+  res.json(response);
 });
 
 router.get("/", async (req, res) => {
   try {
-    const response = "Hello World!";
     res.json(response);
   } catch (err) {
     res.json(err);
