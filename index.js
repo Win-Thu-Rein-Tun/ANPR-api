@@ -3,7 +3,7 @@ const multer = require("multer");
 const xmlparser = require("express-xml-bodyparser");
 const cors = require("cors");
 
-const upload = multer({ limits: { fileSize: Infinity }, dest: "uploads/" });
+const upload = multer({ dest: "uploads/" });
 
 const app = express();
 app.use(cors());
