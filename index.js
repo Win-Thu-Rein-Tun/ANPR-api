@@ -1,15 +1,17 @@
 const express = require("express");
 const multer = require("multer");
+const fileUpload = require("express-fileupload");
 const xmlparser = require("express-xml-bodyparser");
 const cors = require("cors");
 
-const upload = multer({ dest: "uploads/", encoding: "multipart/form-data" });
+// const upload = multer({ dest: "uploads/", encoding: "multipart/form-data" });
 
 const app = express();
 app.use(cors());
 app.use(xmlparser());
+app.use(fileUpload());
 
-app.post("/test", upload.any(), (req, res) => {
+app.post("/test", (req, res) => {
   const contentType = req.headers;
 
   console.log(contentType);
