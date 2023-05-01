@@ -10,11 +10,14 @@ app.use(cors());
 app.use(xmlparser());
 
 app.post("/test", upload.any(), (req, res) => {
-  // console.log(req.body); // anpr.xml file is in req.body
+  const contentType = req.headers;
+
+  console.log(contentType);
+  console.log(req.body); // anpr.xml file is in req.body
   console.log(req.files); // licensePlatePicture.jpg and detectionPicture.jpg are in req.files
   res.status(200).send("Success!");
 });
 
-app.listen(3000, () => {
-  console.log("Server started on port 3000");
+app.listen(6969, () => {
+  console.log("Server started on port 6969");
 });
