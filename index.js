@@ -21,24 +21,12 @@ app.use(xmlparser());
 // });
 // const upload = multer({ storage: storage });
 
-app.post("/test", upload.array("file"), (req, res) => {
+app.post("/test", upload.any(), (req, res) => {
   const contentType = req.headers;
 
   console.log(contentType);
-
-  const parser = new xml2js.Parser();
-
-  parser.parseString(req.body, (err, result) => {
-    if (err) {
-      console.error(err);
-      res.status(400).send("Error parsing XML");
-    } else {
-      // handle the parsed data as needed
-      console.log(result);
-      console.log(req.files); // licensePlatePicture.jpg and detectionPicture.jpg are in req.files
-      res.send("Success");
-    }
-  });
+  console.log(JSON.stringify(req.body));
+  console.log(JSON.stringify(req.files)); // licensePlatePicture.jpg and detectionPicture.jpg are in req.files
 });
 
 app.listen(3000, () => {
