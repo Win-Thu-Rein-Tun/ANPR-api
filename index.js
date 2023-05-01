@@ -3,7 +3,7 @@ const multer = require("multer");
 // const fileUpload = require("express-fileupload");
 // const xmlparser = require("express-xml-bodyparser");
 const cors = require("cors");
-const xml2js = require('xml2js');
+const xml2js = require("xml2js");
 
 const upload = multer({ dest: "uploads/", encoding: "multipart/form-data" });
 
@@ -19,7 +19,7 @@ app.post("/test", upload.any(), async (req, res) => {
 
   const parser = new xml2js.Parser();
 
-  const json = await parser.parseStringPromise(req.files.xml.data);
+  const json = await parser.parseStringPromise(req.files.xml);
 
   // parser.parseString(req.files.buffer.toString(), (err, result) => {
   //   if (err) {
@@ -31,7 +31,7 @@ app.post("/test", upload.any(), async (req, res) => {
   //     res.send('Success');
   //   }
   // });
-  console.log(json)
+  console.log(json);
   console.log(req.body); // anpr.xml file is in req.body
   console.log(req.files); // licensePlatePicture.jpg and detectionPicture.jpg are in req.files
   res.status(200).send("Success!");
