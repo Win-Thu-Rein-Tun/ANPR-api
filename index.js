@@ -3,7 +3,7 @@ const multer = require("multer");
 const xmlparser = require("express-xml-bodyparser");
 const cors = require("cors");
 
-const upload = multer({ dest: "uploads/" });
+const upload = multer({ dest: "uploads/", encoding: "multipart/form-data" });
 
 const app = express();
 app.use(cors());
