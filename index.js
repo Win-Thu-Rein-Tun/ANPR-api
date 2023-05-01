@@ -12,26 +12,24 @@ app.use(cors());
 // app.use(xmlparser());
 // app.use(fileUpload());
 
-app.post("/test", upload.any(), async (req, res) => {
+app.post("/test", upload.any(), (req, res) => {
   const contentType = req.headers;
 
   console.log(contentType);
 
   const parser = new xml2js.Parser();
 
-  const json = await parser.parseStringPromise(req.files.xml);
+  parser.parseString(req.files.buffer.toString(), (err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(400).send("Error parsing XML");
+    } else {
+      // handle the parsed data as needed
+      console.log(result);
+      res.send("Success");
+    }
+  });
 
-  // parser.parseString(req.files.buffer.toString(), (err, result) => {
-  //   if (err) {
-  //     console.error(err);
-  //     res.status(400).send('Error parsing XML');
-  //   } else {
-  //     // handle the parsed data as needed
-  //     console.log(result);
-  //     res.send('Success');
-  //   }
-  // });
-  console.log(json);
   console.log(req.body); // anpr.xml file is in req.body
   console.log(req.files); // licensePlatePicture.jpg and detectionPicture.jpg are in req.files
   res.status(200).send("Success!");
