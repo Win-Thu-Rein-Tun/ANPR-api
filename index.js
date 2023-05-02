@@ -3,6 +3,7 @@ const multer = require("multer");
 const xml2js = require("xml2js");
 const xmlparser = require("express-xml-bodyparser");
 const cors = require("cors");
+const { xml2json } = require("xml-js");
 
 const upload = multer();
 
@@ -14,10 +15,10 @@ app.post("/test", upload.any(), (req, res, next) => {
   const header = req.headers;
   console.log(header);
 
-  const jsonBody = xml2js(req.body);
+  const jsonBody = xml2json(req.body, { spaces: 2, compact: true });
   console.log(jsonBody);
 
-  const jsonFiles = xml2js(req.files);
+  const jsonFiles = xml2json(req.files, { spaces: 2, compact: true });
   console.log(jsonFiles);
 
   res.send("okay");
