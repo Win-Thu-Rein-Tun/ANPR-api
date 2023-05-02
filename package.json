@@ -10,6 +10,7 @@
   "author": "win-thu-rein-tun",
   "license": "ISC",
   "dependencies": {
+    "@szymmis/multipart": "^1.4.1",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "express-fileupload": "^1.4.0",
