@@ -1,30 +1,33 @@
-const express = require("express");
 const multer = require("multer");
 const xml2js = require("xml2js");
-const xmlparser = require("express-xml-bodyparser");
-const cors = require("cors");
-const { xml2json } = require("xml-js");
 
-const upload = multer();
+const upload = multer().any();
 
-const app = express();
-app.use(cors());
-app.use(xmlparser());
+function parseXML(req, res, next) {
+  upload(req, res, function (err) {
+    if (err) {
+      next(err);
+    } else {
+      const xmlString = req.files[0].buffer.toString();
+      xml2js.parseString(xmlString, function (err, result) {
+        if (err) {
+          next(err);
+        } else {
+          req.body = result;
+          next();
+        }
+      });
+    }
+  });
+}
 
-app.post("/test", upload.any(), (req, res, next) => {
+app.post("/test", parseXML, function (req, res, next) {
+  // req.body contains the parsed XML as a JavaScript object
+  // handle the data here
+
   const header = req.headers;
   console.log(header);
 
-  const jsonBody = xml2json(req.body, { spaces: 2, compact: true });
-  console.log(jsonBody);
-
-  const jsonFiles = xml2json(req.files, { spaces: 2, compact: true });
-  console.log(jsonFiles);
-
-  res.send("okay");
+  console.log(req.body);
+  // console.log(req.files);
 });
-
-// configure multer middleware to handle file uploads
-
-// start the server
-app.listen(3000, () => console.log("Server started on port 3000"));
