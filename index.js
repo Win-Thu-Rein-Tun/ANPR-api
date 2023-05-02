@@ -1,6 +1,5 @@
 const express = require("express");
 const multipart = require("@szymmis/multipart");
-const xml2js = require("xml2js");
 
 const app = express();
 
@@ -11,11 +10,8 @@ app.post("/test", (req, res) => {
   console.log(req.body);
   console.log(req.files);
 
-  xml2js.parseString(req.files.anpr.xml.data, (err, result) => {
-    if (err) throw err;
-    console.log(result);
-    // Do something with the parsed object
-  });
+  const anprData = req.files["anpr.xml"].data;
+  console.log(anprData);
 });
 
 app.listen(3000, () => {
