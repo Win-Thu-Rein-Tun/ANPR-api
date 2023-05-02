@@ -10,9 +10,8 @@ app.post("/test", (req, res) => {
   console.log(req.body);
   console.log(req.files);
 
-  const jsonBuffer = req.files.anpr.xml.data.toString();
-
-  console.log(jsonBuffer);
+  const { file } = req.files;
+  console.log(file?.data.toString());
 });
 
 app.listen(3000, () => {
