@@ -6,6 +6,8 @@ const app = express();
 app.use(multipart());
 
 app.post("/test", (req, res) => {
+  console.log(req.headers);
+  console.log(req.body);
   console.log(req.fields);
   console.log(req.files);
 });
