@@ -1,5 +1,8 @@
 const multer = require("multer");
 const xml2js = require("xml2js");
+const express = require("express");
+
+const app = express();
 
 const upload = multer().any();
 
@@ -30,4 +33,8 @@ app.post("/test", parseXML, function (req, res, next) {
 
   console.log(req.body);
   // console.log(req.files);
+});
+
+app.listen(3000, () => {
+  console.log('Server started on port 3000');
 });
