@@ -1,17 +1,23 @@
-const express = require("express");
-const multipart = require("@szymmis/multipart");
-const xml2js = require("xml2js");
+import express from "express";
+import multipart from "@szymmis/multipart";
+import xml2js from "xml2js";
+import cors from "cors";
+
+dotenv.config();
 
 const app = express();
+const port = process.env.PORT || 6969;
+const database = process.env.DATABASE;
 
+app.use(cors());
 app.use(multipart());
 
-app.post("/test", (req, res) => {
+app.post("/test", async (req, res) => {
   // console.log(req.headers);
   // console.log(req.body);
   // console.log(req.files);
 
-  const anprData = req.files["anpr.xml"].data;
+  const anprData = await req.files["anpr.xml"].data;
   const anprString = anprData.toString();
   // console.log(anprString);
 
@@ -33,6 +39,11 @@ app.post("/test", (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log("Server started on port 3000");
+mongoose
+  .connect(database, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("db is connect"))
+  .catch((err) => console.log(err));
+
+app.listen(port, () => {
+  console.log(`Server started on port: ${port}`);
 });

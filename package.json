@@ -3,6 +3,7 @@
   "version": "0.0.2",
   "description": "Hikvision ANPR Mini App",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js"
@@ -12,7 +13,9 @@
   "dependencies": {
     "@szymmis/multipart": "^1.4.1",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "mongoose": "^7.1.0",
     "xml2js": "^0.5.0"
   },
   "devDependencies": {
